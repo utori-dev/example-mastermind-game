@@ -24,7 +24,7 @@ const HomeView: React.FC<HomeViewProps> = (props) => {
 
   return (
     <div>
-      <Button label="Show Rules" onClick={openRulesDialog} />
+      <Button variant="primary" label="Show Rules" onClick={openRulesDialog} />
       <Dialog open={creditsRulesOpen} onClose={closeDialog}>
         <Dialog.Title>MasterMind Rules</Dialog.Title>
         <Dialog.Content>
@@ -60,25 +60,32 @@ const HomeView: React.FC<HomeViewProps> = (props) => {
             </p>
             <ul>
               <li>
-                A black circle with a checkmark indicates that a shape is the
-                correct color/shape and in the correct position.
+                A black circle with a checkmark indicates that a shape is in the
+                solution and in the correct position.
               </li>
               <li>
                 A white circle with an exclamation mark indicates that a shape
-                is the correct color/shape but in the wrong position.
+                is the solution but in the wrong position.
               </li>
             </ul>
           </section>
           <section>
             <h2>Winning</h2>
             <p>
-              If you decipher the code before running out of guesses,
-              you win!
+              If you decipher the code before running out of guesses, you win!
             </p>
-            <footer>Read More at: <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" >Wikipedia/Mastermind</a></footer>
+            <footer>
+              Read More at:
+              <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)">
+                Wikipedia/Mastermind
+              </a>
+            </footer>
           </section>
         </Dialog.Content>
       </Dialog>
+
+      {/** @TODO consider adding Board UI Here
+       */}
     </div>
   );
 };
