@@ -46,6 +46,10 @@
   --color--neutral-99: #fcfcfc;
   --color--neutral-100: #ffffff;
 
+  --color--success--main: #2e7d32;
+  --color--success--light: #4caf50;
+  --color--success--dark: #1b5e20;
+
   --font-size--xs: 0.85rem;
   --font-size--sm: 1rem;
   --font-size--md: 1.25rem;
@@ -78,6 +82,8 @@
   --scrollbar--size: calc(var(--spacing) * 3);
   --scrollbar--track-radius: 0;
   --scrollbar--thumb-radius: var(--border-radius--rounded);
+
+  --slider-primary: 
 
   --shadow--md: 0 calc(var(--spacing)) var(--spacing) 0 rgba(0, 0, 0, 0.25);
 }

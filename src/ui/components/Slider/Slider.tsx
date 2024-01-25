@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { slider as styles } from '../../emotion';
+import { css } from '@emotion/react';
 
 /**
  * Props for the Slider
@@ -68,15 +70,27 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
     []
   );
 
+  /**
+   * Just in case min > max by accident
+  */
+ const newMin = Math.min(min, max);
+ const newMax = Math.max(min, max);
+
+ const determineBackgroundSize = () => `${(sliderValue / newMax) * 100}%`;
+
   return (
     <div>
       <label>
         {label}
         <input
+          css={css`
+            ${styles.base};
+            background-size: ${determineBackgroundSize()};
+          `}
           id={id}
           ref={ref}
-          min={min}
-          max={max}
+          min={newMin}
+          max={newMax}
           {...forwardedProps}
           value={sliderValue}
           type="range"
