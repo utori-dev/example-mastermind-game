@@ -10,7 +10,7 @@ import {
   useDialogIsOpen,
   useThemeMode,
 } from './state';
-import { Button, Dialog, Header, Main, Slider } from './ui/components';
+import { Button, Dialog, Header, Main } from './ui/components';
 import { DarkModeIcon, InfoIcon, LightModeIcon } from './ui/icons';
 
 const AppRoot = styled.div`
@@ -41,10 +41,6 @@ function App(): React.ReactElement | null {
     });
   }, [mode]);
 
-  const handleOnChangeEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target)
-  }
-
   return (
     <AppRoot>
       <Header>
@@ -65,7 +61,6 @@ function App(): React.ReactElement | null {
         </Header.Actions>
       </Header>
       <Main>
-      <Slider color="danger" id={'slider-id'} max={10} doHandleChange={handleOnChangeEvent} value={3}/>
         Lorem ipsum dolor sit amet, consectetur adipiscing yada yada...
       </Main>
       <Dialog open={creditsDialogOpen} onClose={closeDialog}>

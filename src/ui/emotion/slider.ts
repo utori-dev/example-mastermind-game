@@ -9,11 +9,13 @@ interface SliderStyles {
 }
 
 /**
- * @todo Add description
+ * Styles for a input['range'] component.
+ *
+ * These are used in the `ui/components/Slider` component.
  */
 const slider: SliderStyles = {
   base: css`
-  margin-right: 0.5rem;
+    margin-right: 0.5rem;
     -webkit-appearance: none;
     height: 7px;
     background: grey;
