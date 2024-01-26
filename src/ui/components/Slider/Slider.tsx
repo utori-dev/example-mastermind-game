@@ -9,12 +9,12 @@ export type SliderProps = React.HTMLAttributes<HTMLInputElement> & {
   /**
    * Lower limit for range
    */
-  min: number;
+  min?: number;
 
   /**
    * Upper limit for range
    */
-  max: number;
+  max?: number;
 
   /**
    * Current slider value
@@ -40,6 +40,11 @@ export type SliderProps = React.HTMLAttributes<HTMLInputElement> & {
    * Input id
    */
   id: string;
+
+  /**
+   * color of slider
+   */
+  color?: 'primary' | 'secondary' | 'danger' | 'success' | 'warn' | 'info';
 };
 
 /**
@@ -50,13 +55,14 @@ export type SliderProps = React.HTMLAttributes<HTMLInputElement> & {
  */
 const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
   const {
-    min,
-    max,
+    min = 0,
+    max = 100,
     value,
     doHandleChange,
     label,
     id,
     tick = true,
+    color = 'primary',
     ...forwardedProps
   } = props;
   const [sliderValue, setSliderValue] = React.useState(value);
@@ -72,11 +78,11 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
 
   /**
    * Just in case min > max by accident
-  */
- const newMin = Math.min(min, max);
- const newMax = Math.max(min, max);
+   */
+  const newMin = Math.min(min, max);
+  const newMax = Math.max(min, max);
 
- const determineBackgroundSize = () => `${(sliderValue / newMax) * 100}%`;
+  const determineBackgroundSize = () => `${(sliderValue / newMax) * 100}%`;
 
   return (
     <div>
@@ -85,6 +91,7 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
         <input
           css={css`
             ${styles.base};
+            ${styles.color[color]};
             background-size: ${determineBackgroundSize()};
           `}
           id={id}

@@ -65,7 +65,7 @@ function App(): React.ReactElement | null {
         </Header.Actions>
       </Header>
       <Main>
-      <Slider id={'slider-id'} min={0} max={10} doHandleChange={handleOnChangeEvent} value={3}/>
+      <Slider color="danger" id={'slider-id'} min={0} max={10} doHandleChange={handleOnChangeEvent} value={3}/>
         Lorem ipsum dolor sit amet, consectetur adipiscing yada yada...
       </Main>
       <Dialog open={creditsDialogOpen} onClose={closeDialog}>
