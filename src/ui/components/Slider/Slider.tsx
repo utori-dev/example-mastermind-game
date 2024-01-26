@@ -79,26 +79,24 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
   const determineBackgroundSize = () => `${(sliderValue / newMax) * 100}%`;
 
   return (
-    <div>
-      <label>
-        <input
-          css={css`
-            ${styles.base};
-            ${styles.color[color]};
-            background-size: ${determineBackgroundSize()};
-          `}
-          id={id}
-          ref={ref}
-          min={newMin}
-          max={newMax}
-          {...forwardedProps}
-          value={sliderValue}
-          type="range"
-          onChange={handleOnChangeEvent}
-        />
-        {tick ? max : ''}
-      </label>
-    </div>
+    <label>
+      <input
+        css={css`
+          ${styles.base};
+          ${styles.color[color]};
+          background-size: ${determineBackgroundSize()};
+        `}
+        id={id}
+        ref={ref}
+        min={newMin}
+        max={newMax}
+        {...forwardedProps}
+        value={sliderValue}
+        type="range"
+        onChange={handleOnChangeEvent}
+      />
+      {tick ? max : ''}
+    </label>
   );
 });
 

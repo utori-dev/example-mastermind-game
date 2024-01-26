@@ -13,6 +13,7 @@ interface SliderStyles {
  */
 const slider: SliderStyles = {
   base: css`
+  margin-right: 0.5rem;
     -webkit-appearance: none;
     height: 7px;
     background: grey;
