@@ -27,11 +27,6 @@ export type SliderProps = React.HTMLAttributes<HTMLInputElement> & {
   doHandleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
-   * Label to be displayed
-   */
-  label?: string;
-
-  /**
    * Displays range values
    */
   tick?: boolean;
@@ -59,7 +54,6 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
     max = 100,
     value,
     doHandleChange,
-    label,
     id,
     tick = true,
     color = 'primary',
@@ -87,7 +81,6 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
   return (
     <div>
       <label>
-        {label}
         <input
           css={css`
             ${styles.base};
@@ -103,6 +96,7 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
           type="range"
           onChange={handleOnChangeEvent}
         />
+        {tick ? max : ''}
       </label>
     </div>
   );
