@@ -21,7 +21,7 @@ describe('Slider', () => {
     expect(tree).toBeTruthy();
   });
 
-  it('should render without errors', () => {
+  it('should call doHandleChange on change event', () => {
     // Arrange
     const doHandleChange = jest.fn();
     render(
