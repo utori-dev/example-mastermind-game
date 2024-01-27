@@ -76,7 +76,7 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
   const newMin = Math.min(min, max);
   const newMax = Math.max(min, max);
 
-  const determineBackgroundSize = () => `${(sliderValue / newMax) * 100}%`;
+  const determineBackgroundSize = () => `${((sliderValue - newMin) / (newMax - newMin)) * 100}%`;
 
   return (
     <label>

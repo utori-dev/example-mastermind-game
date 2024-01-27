@@ -18,6 +18,13 @@ export function openCreditsDialog(): void {
   });
 }
 
+export function openSettingsDialog(): void {
+  store.dispatch({
+    type: 'dialog/open',
+    payload: { key: DialogKey.SETTINGS, data: {} },
+  });
+}
+
 export function toggleThemeMode(): void {
   store.dispatch({ type: 'theme/mode/toggle' });
 }
