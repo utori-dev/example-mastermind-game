@@ -5,12 +5,13 @@ export type EqualityChecker<T> = (a: T, b: T) => boolean;
 export enum DialogKey {
   CREDITS = 'credits',
   SETTINGS = 'settings',
+  RULES = 'rules',
 }
 
 type BaseDialogState<K extends DialogKey, D = unknown> = { key: K; data: D };
 
 // This could be modified to be a union type for stricter type validation.
-export type DialogState = null | BaseDialogState<DialogKey.CREDITS | DialogKey.SETTINGS>;
+export type DialogState = null | BaseDialogState<DialogKey.CREDITS | DialogKey.RULES | DialogKey.SETTINGS>;
 
 export type DialogAction =
   | Action<'dialog/close'>

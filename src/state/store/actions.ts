@@ -25,6 +25,13 @@ export function openSettingsDialog(): void {
   });
 }
 
+export function openRulesDialog(): void {
+  store.dispatch({
+    type: 'dialog/open',
+    payload: { key: DialogKey.RULES, data: {} },
+  });
+}
+
 export function toggleThemeMode(): void {
   store.dispatch({ type: 'theme/mode/toggle' });
 }

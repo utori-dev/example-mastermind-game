@@ -3,6 +3,7 @@ import {
   closeDialog,
   openCreditsDialog,
   openSettingsDialog,
+  openRulesDialog,
   openDialog,
   resetThemeMode,
   setThemeMode,
@@ -78,6 +79,25 @@ describe('data/store/actions', () => {
 
       // Act
       openSettingsDialog();
+
+      // Assert
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: 'dialog/open',
+        payload: dialog,
+      });
+    });
+  });
+
+  describe('openRulesDialog', () => {
+    it('should dispatch action to open the mastermind rules dialog', () => {
+      // Arrange
+      const dialog = {
+        key: DialogKey.RULES,
+        data: {},
+      };
+
+      // Act
+      openRulesDialog();
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
