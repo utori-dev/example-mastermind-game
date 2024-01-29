@@ -4,6 +4,8 @@ export * from './DarkModeIcon';
 export { default as DarkModeIcon } from './DarkModeIcon';
 export * from './FeatherBaseIcon';
 export { default as FeatherBaseIcon } from './FeatherBaseIcon';
+export * from './GearIcon';
+export { default as GearIcon } from './GearIcon';
 export * from './InfoIcon';
 export { default as InfoIcon } from './InfoIcon';
 export * from './LightModeIcon';

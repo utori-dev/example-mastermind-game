@@ -8,3 +8,5 @@ export * from './Header';
 export { default as Header } from './Header';
 export * from './Main';
 export { default as Main } from './Main';
+export * from './Slider';
+export { default as Slider } from './Slider';

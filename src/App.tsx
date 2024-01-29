@@ -6,12 +6,13 @@ import {
   DialogKey,
   closeDialog,
   openCreditsDialog,
+  openSettingsDialog,
   toggleThemeMode,
   useDialogIsOpen,
   useThemeMode,
 } from './state';
-import { Button, Dialog, Header, Main } from './ui/components';
-import { DarkModeIcon, InfoIcon, LightModeIcon } from './ui/icons';
+import { Button, Dialog, Header, Main, Slider } from './ui/components';
+import { DarkModeIcon, InfoIcon, LightModeIcon, GearIcon } from './ui/icons';
 
 const AppRoot = styled.div`
   position: fixed;
@@ -33,6 +34,20 @@ const AppRoot = styled.div`
 function App(): React.ReactElement | null {
   const mode = useThemeMode();
   const creditsDialogOpen = useDialogIsOpen(DialogKey.CREDITS);
+  const settingDialogOpen = useDialogIsOpen(DialogKey.SETTINGS);
+
+  /**
+   * @todo Create proper dispatch function in actions.ts to update setting state
+   * and initialize slider component with values from state
+   */
+  const doHandleSettingChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    /**
+     * id and value should probably be the action payload
+     */
+    const { id, value } = event.target;
+  };
 
   React.useEffect(() => {
     document.body.className = clsx({
@@ -54,6 +69,12 @@ function App(): React.ReactElement | null {
           />
           <Button
             iconOnly
+            label="Settings"
+            onClick={openSettingsDialog}
+            icon={<GearIcon />}
+          />
+          <Button
+            iconOnly
             label="View Credits"
             onClick={openCreditsDialog}
             icon={<InfoIcon />}
@@ -63,6 +84,60 @@ function App(): React.ReactElement | null {
       <Main>
         Lorem ipsum dolor sit amet, consectetur adipiscing yada yada...
       </Main>
+
+      {/* Settings dialog */}
+      <Dialog open={settingDialogOpen} onClose={closeDialog}>
+        <Dialog.Title>Settings</Dialog.Title>
+        <Dialog.Content>
+          <section>
+            <h2>Number of Rows</h2>
+            <p>
+              Adjust the number of rows in a game.
+              <br />A higher value indecates a higher difficulty
+            </p>
+            <Slider
+              color="success"
+              value={4}
+              min={4}
+              max={10}
+              id="rows"
+              doHandleChange={doHandleSettingChange}
+            />
+          </section>
+          <section>
+            <h2>Number of Columns</h2>
+            <p>
+              Adjust the number of columns in a game.
+              <br />A higher value indecates a higher difficulty
+            </p>
+            <Slider
+              color="success"
+              value={4}
+              min={4}
+              max={10}
+              id="columns"
+              doHandleChange={doHandleSettingChange}
+            />
+          </section>
+          <section>
+            <h2>Number of Colors</h2>
+            <p>
+              Adjust the number of colors in a game.
+              <br />A higher value indecates a higher difficulty
+            </p>
+            <Slider
+              color="success"
+              value={4}
+              min={4}
+              max={10}
+              id="colors"
+              doHandleChange={doHandleSettingChange}
+            />
+          </section>
+        </Dialog.Content>
+      </Dialog>
+
+      {/* Credits dialog */}
       <Dialog open={creditsDialogOpen} onClose={closeDialog}>
         <Dialog.Title>Credits</Dialog.Title>
         <Dialog.Content>
