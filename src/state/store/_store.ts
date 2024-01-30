@@ -3,8 +3,9 @@ import { persistReducer, persistStore, createTransform } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { AppState } from './types';
 
-import { default as themeReducer } from './theme.slice'
-import { default as dialogReducer } from './dialog.slice'
+import { default as themeReducer } from './theme.slice';
+import { default as dialogReducer } from './dialog.slice';
+import { default as settingsReducer } from './settings.slice';
 
 const SetTransform = createTransform(
   /**
@@ -24,11 +25,17 @@ const SetTransform = createTransform(
   /** 
    * define which reducers this transform gets called for.
    */
-  { whitelist: ['theme'] }
+  { whitelist: ['theme', 'settings'] }
 );
 
 const themeSliceConfig = {
   key: 'theme',
+  storage,
+  transforms: [SetTransform],
+};
+
+const settingsSliceConfig = {
+  key: 'settings',
   storage,
   transforms: [SetTransform],
 };
@@ -39,6 +46,7 @@ const themeSliceConfig = {
  */
 const persistedReducers = combineReducers({
   theme: persistReducer(themeSliceConfig, themeReducer),
+  settings: persistReducer(settingsSliceConfig, settingsReducer)
 });
 
 const store = configureStore({

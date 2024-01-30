@@ -27,12 +27,21 @@ function useSelector<T>(
 
 const selectThemeMode = (state: AppState) => state.persistedReducers.theme.mode;
 
+const selectSettings = (state: AppState) => state.persistedReducers.settings;
+
 /**
  * Returns the color scheme for the current theme.
  *
  * @returns 'light' or 'dark'
  */
 export const useThemeMode = () => useSelector(selectThemeMode);
+
+/**
+ * Returns the currents settings.
+ *
+ * @returns the settings object
+ */
+export const useSettings = () => useSelector(selectSettings);
 
 const selectDialogData = (state: AppState, key: string) =>
   state.dialog?.key === key ? state.dialog.data : null;

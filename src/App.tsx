@@ -10,6 +10,9 @@ import {
   toggleThemeModeAction,
   useDialogIsOpen,
   useThemeMode,
+  useSettings,
+  setSettingsAction,
+  SettingsState,
 } from './state';
 import { Button, Dialog, Header, Main, Slider } from './ui/components';
 import { DarkModeIcon, InfoIcon, LightModeIcon, GearIcon } from './ui/icons';
@@ -34,6 +37,7 @@ const AppRoot = styled.div`
 
 function App(): React.ReactElement | null {
   const mode = useThemeMode();
+  const settings = useSettings();
   const creditsDialogOpen = useDialogIsOpen(DialogKey.CREDITS);
   const settingDialogOpen = useDialogIsOpen(DialogKey.SETTINGS);
 
@@ -48,6 +52,7 @@ function App(): React.ReactElement | null {
      * id and value should probably be the action payload
      */
     const { id, value } = event.target;
+    setSettingsAction({ key: id as keyof SettingsState, value: Number(value) });
   };
 
   React.useEffect(() => {
@@ -98,7 +103,7 @@ function App(): React.ReactElement | null {
             </p>
             <Slider
               color="success"
-              value={4}
+              value={settings.rows}
               min={4}
               max={10}
               id="rows"
@@ -113,7 +118,7 @@ function App(): React.ReactElement | null {
             </p>
             <Slider
               color="success"
-              value={4}
+              value={settings.columns}
               min={4}
               max={10}
               id="columns"
@@ -128,7 +133,7 @@ function App(): React.ReactElement | null {
             </p>
             <Slider
               color="success"
-              value={4}
+              value={settings.shapes}
               min={4}
               max={10}
               id="shapes"

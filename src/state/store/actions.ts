@@ -1,9 +1,10 @@
 // Actions are bound to the store to avoid Redux-specific concerns outside the module.
 
 import store from './_store';
-import { DialogKey, DialogState, ThemeState } from './types';
+import { DialogKey, DialogState, ThemeState, SettingsPayload } from './types';
 import { setThemeMode, resetThemeMode, toggleThemeMode } from './theme.slice';
 import { dialogOpen, dialogClose } from './dialog.slice';
+import { setSettings } from './settings.slice';
 
 export function closeDialog(): void {
   store.dispatch(dialogClose({}));
@@ -34,4 +35,8 @@ export function resetThemeModeAction(): void {
 
 export function setThemeModeAction(mode: ThemeState['mode']): void {
   store.dispatch(setThemeMode(mode));
+}
+
+export function setSettingsAction({ key, value }: SettingsPayload): void {
+  store.dispatch(setSettings({ key, value }));
 }
