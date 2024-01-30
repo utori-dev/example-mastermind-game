@@ -7,7 +7,7 @@ import {
   closeDialog,
   openCreditsDialog,
   openSettingsDialog,
-  toggleThemeMode,
+  toggleThemeModeAction,
   useDialogIsOpen,
   useThemeMode,
 } from './state';
@@ -65,7 +65,7 @@ function App(): React.ReactElement | null {
           <Button
             iconOnly
             label="Toggle Light and Dark Mode"
-            onClick={toggleThemeMode}
+            onClick={toggleThemeModeAction}
             icon={mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
           />
           <Button
@@ -121,7 +121,7 @@ function App(): React.ReactElement | null {
             />
           </section>
           <section>
-            <h2>Number of Colors</h2>
+            <h2>Number of Shapes</h2>
             <p>
               Adjust the number of colors in a game.
               <br />A higher value indicates a higher difficulty
@@ -131,7 +131,7 @@ function App(): React.ReactElement | null {
               value={4}
               min={4}
               max={10}
-              id="colors"
+              id="shapes"
               doHandleChange={doHandleSettingChange}
             />
           </section>

@@ -3,8 +3,8 @@ import { useDialogData, useDialogIsOpen, useThemeMode } from './hooks';
 import {
   closeDialog,
   openDialog,
-  setThemeMode,
-  toggleThemeMode,
+  setThemeModeAction,
+  toggleThemeModeAction,
 } from './actions';
 import { DialogKey } from './types';
 
@@ -14,7 +14,7 @@ describe('data/store/hooks', () => {
   describe('useThemeMode', () => {
     it('should return current theme mode', () => {
       // Arrange
-      act(() => setThemeMode('light'));
+      act(() => setThemeModeAction('light'));
 
       // Act
       const { result, rerender } = renderHook(() => useThemeMode());
@@ -23,14 +23,14 @@ describe('data/store/hooks', () => {
       expect(result.current).toBe('light');
 
       // Act
-      act(() => toggleThemeMode());
+      act(() => toggleThemeModeAction());
       rerender();
 
       // Assert
       expect(result.current).toBe('dark');
 
       // Teardown
-      act(() => setThemeMode('light'));
+      act(() => setThemeModeAction('light'));
     });
   });
 

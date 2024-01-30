@@ -19,7 +19,13 @@ export type DialogAction =
 
 export interface ThemeState {
   mode: 'light' | 'dark';
-}
+};
+
+export interface SettingsState {
+  rows: number;
+  columns: number;
+  shapes: number;
+};
 
 export type ThemeAction =
   | Action<'theme/mode/toggle'>
@@ -27,7 +33,9 @@ export type ThemeAction =
   | PayloadAction<ThemeState['mode'], 'theme/mode/set'>;
 
 export type AppState = {
-  theme: ThemeState;
+  persistedReducers: {
+    theme: ThemeState;
+  }
   dialog: DialogState;
 };
 
