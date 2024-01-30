@@ -12,7 +12,7 @@ import {
   useThemeMode,
 } from './state';
 import { Button, Dialog, Header, Main, Slider } from './ui/components';
-import { DarkModeIcon, InfoIcon, LightModeIcon } from './ui/icons';
+import { DarkModeIcon, InfoIcon, LightModeIcon, GearIcon } from './ui/icons';
 import { HomeView } from './views';
 
 const AppRoot = styled.div`
@@ -83,7 +83,7 @@ function App(): React.ReactElement | null {
         </Header.Actions>
       </Header>
       <Main>
-   <HomeView />
+        <HomeView />
       </Main>
 
       {/* Settings dialog */}
