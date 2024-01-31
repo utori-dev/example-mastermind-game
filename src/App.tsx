@@ -94,7 +94,7 @@ function App(): React.ReactElement | null {
             <h2>Number of Rows</h2>
             <p>
               Adjust the number of rows in a game.
-              <br />A higher value indecates a higher difficulty
+              <br />A higher value indicates a higher difficulty
             </p>
             <Slider
               color="success"
@@ -109,7 +109,7 @@ function App(): React.ReactElement | null {
             <h2>Number of Columns</h2>
             <p>
               Adjust the number of columns in a game.
-              <br />A higher value indecates a higher difficulty
+              <br />A higher value indicates a higher difficulty
             </p>
             <Slider
               color="success"
@@ -124,7 +124,7 @@ function App(): React.ReactElement | null {
             <h2>Number of Colors</h2>
             <p>
               Adjust the number of colors in a game.
-              <br />A higher value indecates a higher difficulty
+              <br />A higher value indicates a higher difficulty
             </p>
             <Slider
               color="success"
@@ -143,8 +143,8 @@ function App(): React.ReactElement | null {
         <Dialog.Title>Credits</Dialog.Title>
         <Dialog.Content>
           <p>
-            This React app prototype template was created by{' '}
-            <a href="https://github.com/chellimiller">Michelle Miller</a> and{' '}
+            This React app prototype template was created by&nbsp;
+            <a href="https://github.com/chellimiller">Michelle Miller</a> and&nbsp;
             <a href="https://github.com/JaredBourget">Jared Bourget</a>.
           </p>
           <p>
@@ -177,7 +177,7 @@ function App(): React.ReactElement | null {
               <li>
                 <a href="https://github.com/sindresorhus/type-fest">
                   Type Fest
-                </a>{' '}
+                </a>&nbsp;
                 for utility types.
               </li>
               <li>
@@ -202,7 +202,7 @@ function App(): React.ReactElement | null {
             </ul>
           </p>
           <p>
-            To learn more,{' '}
+            To learn more,&nbsp;
             <a href="https://github.com/utori-dev/template-react-app-prototype">
               view the project on GitHub!
             </a>

@@ -44,8 +44,8 @@ const HomeView: React.FC<HomeViewProps> = (props) => {
               Based on the difficulty chosen, a sequence of 4-8 colored shapes
               will be randomly generated.
               <br />
-              This setting, along with how number of shapes and checks may be
-              altered.
+              This setting, along with the number of rows, columns, and checks
+              may be altered.
             </p>
           </section>
           <section>
@@ -75,7 +75,7 @@ const HomeView: React.FC<HomeViewProps> = (props) => {
               If you decipher the code before running out of guesses, you win!
             </p>
             <footer>
-              Read More at:
+              Read More at:&nbsp;
               <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)">
                 Wikipedia/Mastermind
               </a>
