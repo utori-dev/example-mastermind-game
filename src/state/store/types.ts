@@ -23,13 +23,11 @@ export interface ThemeState {
   mode: 'light' | 'dark';
 }
 
-export interface SettingsState {
+export type SettingsState  = {
   rows: number;
   columns: number;
   shapes: number;
 }
-
-export type SettingsPayload = { key: keyof SettingsState; value: number };
 
 export type ThemeAction =
   | Action<'theme/mode/toggle'>

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SettingsState, SettingsPayload } from './types';
+import { SettingsState } from './types';
 
 const INITIAL_STATE: SettingsState = {
   rows: 8,
@@ -11,9 +11,9 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState: { ...INITIAL_STATE },
   reducers: {
-    setSettings: (state, action: PayloadAction<SettingsPayload>) => {
-      const { key, value } = action.payload;
-      state[key] = value;
+    setSettings: (state, action: PayloadAction<SettingsState>) => {
+      const settings = action.payload;
+      state = settings;
     },
 
     resetSettings: (state) => {

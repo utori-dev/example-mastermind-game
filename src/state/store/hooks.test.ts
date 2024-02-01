@@ -1,5 +1,10 @@
 import { renderHook, act } from '@testing-library/react';
-import { useDialogData, useDialogIsOpen, useThemeMode } from './hooks';
+import {
+  useDialogData,
+  useDialogIsOpen,
+  useThemeMode,
+  useSettings,
+} from './hooks';
 import {
   closeDialog,
   openDialog,
@@ -31,6 +36,16 @@ describe('data/store/hooks', () => {
 
       // Teardown
       act(() => setThemeModeAction('light'));
+    });
+  });
+
+  describe('useSettings', () => {
+    it('should return the settings', () => {
+      // Act
+      const { result } = renderHook(() => useSettings());
+
+      // Assert
+      expect(result.current.shapes).toBe(4);
     });
   });
 

@@ -8,6 +8,7 @@ import {
   resetThemeModeAction,
   setThemeModeAction,
   toggleThemeModeAction,
+  setSettingsAction,
 } from './actions';
 import { DialogKey } from './types';
 
@@ -145,6 +146,26 @@ describe('data/store/actions', () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         type: 'theme/setThemeMode',
         payload: 'light',
+      });
+    });
+  });
+
+  describe('setSettings', () => {
+    it('should dispatch action to set the settings object', () => {
+      // Arrange
+      const SETTINGS = {
+        shapes: 9,
+        rows: 5,
+        columns: 4,
+      };
+
+      // Act
+      setSettingsAction(SETTINGS);
+
+      // Assert
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: 'settings/setSettings',
+        payload: SETTINGS,
       });
     });
   });

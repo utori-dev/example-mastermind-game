@@ -12,7 +12,6 @@ import {
   useThemeMode,
   useSettings,
   setSettingsAction,
-  SettingsState,
 } from './state';
 import { Button, Dialog, Header, Main, Slider } from './ui/components';
 import { DarkModeIcon, InfoIcon, LightModeIcon, GearIcon } from './ui/icons';
@@ -37,22 +36,32 @@ const AppRoot = styled.div`
 
 function App(): React.ReactElement | null {
   const mode = useThemeMode();
-  const settings = useSettings();
+  const { rows, columns, shapes } = useSettings();
   const creditsDialogOpen = useDialogIsOpen(DialogKey.CREDITS);
   const settingDialogOpen = useDialogIsOpen(DialogKey.SETTINGS);
 
+  const [settings, setSettings] = React.useState({ rows, columns, shapes });
+
   /**
-   * @todo Create proper dispatch function in actions.ts to update setting state
-   * and initialize slider component with values from state
+   * Updating the settings object
+   * @param event
    */
   const doHandleSettingChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    /**
-     * id and value should probably be the action payload
-     */
     const { id, value } = event.target;
-    setSettingsAction({ key: id as keyof SettingsState, value: Number(value) });
+    setSettings({
+      ...settings,
+      [id]: Number(value),
+    });
+  };
+
+  /**
+   * Function to submit the user's settings to be saved to state
+   */
+  const doHandleSubmit = () => {
+    setSettingsAction(settings);
+    closeDialog();
   };
 
   React.useEffect(() => {
@@ -140,6 +149,12 @@ function App(): React.ReactElement | null {
               doHandleChange={doHandleSettingChange}
             />
           </section>
+          <Button
+            variant="primary"
+            type="submit"
+            label="Save"
+            onClick={doHandleSubmit}
+          />
         </Dialog.Content>
       </Dialog>
 
@@ -149,7 +164,8 @@ function App(): React.ReactElement | null {
         <Dialog.Content>
           <p>
             This React app prototype template was created by&nbsp;
-            <a href="https://github.com/chellimiller">Michelle Miller</a> and&nbsp;
+            <a href="https://github.com/chellimiller">Michelle Miller</a>{' '}
+            and&nbsp;
             <a href="https://github.com/JaredBourget">Jared Bourget</a>.
           </p>
           <p>
@@ -182,8 +198,8 @@ function App(): React.ReactElement | null {
               <li>
                 <a href="https://github.com/sindresorhus/type-fest">
                   Type Fest
-                </a>&nbsp;
-                for utility types.
+                </a>
+                &nbsp; for utility types.
               </li>
               <li>
                 <a href="https://reactrouter.com/en/main">React Router</a> for
