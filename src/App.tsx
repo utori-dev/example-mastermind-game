@@ -61,9 +61,12 @@ function App(): React.ReactElement | null {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { id, value } = event.target;
-    setSettings({
-      ...settings,
-      [id]: Number(value),
+
+    setSettings((previousState) => {
+      return {
+        ...previousState,
+        [id]: Number(value),
+      };
     });
   };
 
