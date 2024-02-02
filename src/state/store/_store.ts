@@ -6,6 +6,7 @@ import { AppState } from './types';
 import { default as themeReducer } from './theme.slice';
 import { default as dialogReducer } from './dialog.slice';
 import { default as settingsReducer } from './settings.slice';
+import { default as boardReducer } from './board.slice';
 
 const SetTransform = createTransform(
   /**
@@ -25,7 +26,7 @@ const SetTransform = createTransform(
   /** 
    * define which reducers this transform gets called for.
    */
-  { whitelist: ['theme', 'settings'] }
+  { whitelist: ['theme', 'settings', 'board'] }
 );
 
 const themeSliceConfig = {
@@ -40,13 +41,20 @@ const settingsSliceConfig = {
   transforms: [SetTransform],
 };
 
+const boardSliceConfig = {
+  key: 'board',
+  storage,
+  transforms: [SetTransform],
+};
+
 /**
  * Any reducers added to this object will be saved to local or session storage.
  * as defined in the slice config file.
  */
 const persistedReducers = combineReducers({
   theme: persistReducer(themeSliceConfig, themeReducer),
-  settings: persistReducer(settingsSliceConfig, settingsReducer)
+  settings: persistReducer(settingsSliceConfig, settingsReducer),
+  board: persistReducer(boardSliceConfig, boardReducer)
 });
 
 const store = configureStore({

@@ -1,5 +1,7 @@
 // AUTO-GENERATED, DO NOT EDIT
 
+export * from './Board';
+export { default as Board } from './Board';
 export * from './Button';
 export { default as Button } from './Button';
 export * from './Dialog';
