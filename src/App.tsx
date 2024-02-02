@@ -7,9 +7,11 @@ import {
   closeDialog,
   openCreditsDialog,
   openSettingsDialog,
-  toggleThemeMode,
+  toggleThemeModeAction,
   useDialogIsOpen,
   useThemeMode,
+  useSettings,
+  setSettingsAction,
 } from './state';
 import { Button, Dialog, Header, Main, Slider } from './ui/components';
 import { DarkModeIcon, InfoIcon, LightModeIcon, GearIcon } from './ui/icons';
@@ -32,22 +34,45 @@ const AppRoot = styled.div`
   ${text.md}
 `;
 
+const Section = styled.section`
+  min-width: 20rem;
+  padding: 1rem;
+`;
+
+const ActionContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+`;
+
 function App(): React.ReactElement | null {
   const mode = useThemeMode();
+  const gameSettings = useSettings();
   const creditsDialogOpen = useDialogIsOpen(DialogKey.CREDITS);
   const settingDialogOpen = useDialogIsOpen(DialogKey.SETTINGS);
 
+  const [settings, setSettings] = React.useState(gameSettings);
+
   /**
-   * @todo Create proper dispatch function in actions.ts to update setting state
-   * and initialize slider component with values from state
+   * Updating the settings object
+   * @param event
    */
   const doHandleSettingChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    /**
-     * id and value should probably be the action payload
-     */
     const { id, value } = event.target;
+    setSettings({
+      ...settings,
+      [id]: Number(value),
+    });
+  };
+
+  /**
+   * Function to submit the user's settings to be saved to state
+   */
+  const doHandleSubmit = () => {
+    setSettingsAction(settings);
+    closeDialog();
   };
 
   React.useEffect(() => {
@@ -65,7 +90,7 @@ function App(): React.ReactElement | null {
           <Button
             iconOnly
             label="Toggle Light and Dark Mode"
-            onClick={toggleThemeMode}
+            onClick={toggleThemeModeAction}
             icon={mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
           />
           <Button
@@ -90,51 +115,59 @@ function App(): React.ReactElement | null {
       <Dialog open={settingDialogOpen} onClose={closeDialog}>
         <Dialog.Title>Settings</Dialog.Title>
         <Dialog.Content>
-          <section>
+          <Section>
             <h2>Number of Rows</h2>
             <p>
               Adjust the number of rows in a game.
-              <br />A higher value indicates a higher difficulty
+              <br />A higher value indicates a higher difficulty.
             </p>
             <Slider
               color="success"
-              value={4}
+              value={settings.rows}
               min={4}
               max={10}
               id="rows"
               doHandleChange={doHandleSettingChange}
             />
-          </section>
-          <section>
+          </Section>
+          <Section>
             <h2>Number of Columns</h2>
             <p>
               Adjust the number of columns in a game.
-              <br />A higher value indicates a higher difficulty
+              <br />A higher value indicates a higher difficulty.
             </p>
             <Slider
               color="success"
-              value={4}
+              value={settings.columns}
               min={4}
               max={10}
               id="columns"
               doHandleChange={doHandleSettingChange}
             />
-          </section>
-          <section>
-            <h2>Number of Colors</h2>
+          </Section>
+          <Section>
+            <h2>Number of Shapes</h2>
             <p>
               Adjust the number of colors in a game.
-              <br />A higher value indicates a higher difficulty
+              <br />A higher value indicates a higher difficulty.
             </p>
             <Slider
               color="success"
-              value={4}
+              value={settings.shapes}
               min={4}
               max={10}
-              id="colors"
+              id="shapes"
               doHandleChange={doHandleSettingChange}
             />
-          </section>
+          </Section>
+          <ActionContainer>
+            <Button
+              variant="primary"
+              type="submit"
+              label="Save"
+              onClick={doHandleSubmit}
+            />
+          </ActionContainer>
         </Dialog.Content>
       </Dialog>
 
@@ -144,7 +177,8 @@ function App(): React.ReactElement | null {
         <Dialog.Content>
           <p>
             This React app prototype template was created by&nbsp;
-            <a href="https://github.com/chellimiller">Michelle Miller</a> and&nbsp;
+            <a href="https://github.com/chellimiller">Michelle Miller</a>{' '}
+            and&nbsp;
             <a href="https://github.com/JaredBourget">Jared Bourget</a>.
           </p>
           <p>
@@ -177,8 +211,8 @@ function App(): React.ReactElement | null {
               <li>
                 <a href="https://github.com/sindresorhus/type-fest">
                   Type Fest
-                </a>&nbsp;
-                for utility types.
+                </a>
+                &nbsp; for utility types.
               </li>
               <li>
                 <a href="https://reactrouter.com/en/main">React Router</a> for

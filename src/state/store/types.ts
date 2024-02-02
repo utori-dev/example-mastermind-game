@@ -11,7 +11,9 @@ export enum DialogKey {
 type BaseDialogState<K extends DialogKey, D = unknown> = { key: K; data: D };
 
 // This could be modified to be a union type for stricter type validation.
-export type DialogState = null | BaseDialogState<DialogKey.CREDITS | DialogKey.RULES | DialogKey.SETTINGS>;
+export type DialogState = null | BaseDialogState<
+  DialogKey.CREDITS | DialogKey.RULES | DialogKey.SETTINGS
+>;
 
 export type DialogAction =
   | Action<'dialog/close'>
@@ -21,13 +23,23 @@ export interface ThemeState {
   mode: 'light' | 'dark';
 }
 
+export type SettingsState  = {
+  rows: number;
+  columns: number;
+  shapes: number;
+  _persist?: any;
+}
+
 export type ThemeAction =
   | Action<'theme/mode/toggle'>
   | Action<'theme/mode/reset'>
   | PayloadAction<ThemeState['mode'], 'theme/mode/set'>;
 
 export type AppState = {
-  theme: ThemeState;
+  persistedReducers: {
+    theme: ThemeState;
+    settings: SettingsState;
+  };
   dialog: DialogState;
 };
 

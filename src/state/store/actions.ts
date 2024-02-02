@@ -1,45 +1,42 @@
 // Actions are bound to the store to avoid Redux-specific concerns outside the module.
 
 import store from './_store';
-import { DialogKey, DialogState, ThemeState } from './types';
+import { DialogKey, DialogState, SettingsState, ThemeState } from './types';
+import { setThemeMode, resetThemeMode, toggleThemeMode } from './theme.slice';
+import { dialogOpen, dialogClose } from './dialog.slice';
+import { setSettings } from './settings.slice';
 
 export function closeDialog(): void {
-  store.dispatch({ type: 'dialog/close' });
+  store.dispatch(dialogClose({}));
 }
 
 export function openDialog(payload: Exclude<DialogState, null>): void {
-  store.dispatch({ type: 'dialog/open', payload });
+  store.dispatch(dialogOpen(payload));
 }
 
 export function openCreditsDialog(): void {
-  store.dispatch({
-    type: 'dialog/open',
-    payload: { key: DialogKey.CREDITS, data: {} },
-  });
+  store.dispatch(dialogOpen({ key: DialogKey.CREDITS, data: {} }));
 }
 
 export function openSettingsDialog(): void {
-  store.dispatch({
-    type: 'dialog/open',
-    payload: { key: DialogKey.SETTINGS, data: {} },
-  });
+  store.dispatch(dialogOpen({ key: DialogKey.SETTINGS, data: {} }));
 }
-
 export function openRulesDialog(): void {
-  store.dispatch({
-    type: 'dialog/open',
-    payload: { key: DialogKey.RULES, data: {} },
-  });
+  store.dispatch(dialogOpen({ key: DialogKey.RULES, data: {} }));
 }
 
-export function toggleThemeMode(): void {
-  store.dispatch({ type: 'theme/mode/toggle' });
+export function toggleThemeModeAction(): void {
+  store.dispatch(toggleThemeMode());
 }
 
-export function resetThemeMode(): void {
-  store.dispatch({ type: 'theme/mode/reset' });
+export function resetThemeModeAction(): void {
+  store.dispatch(resetThemeMode());
 }
 
-export function setThemeMode(mode: ThemeState['mode']): void {
-  store.dispatch({ type: 'theme/mode/set', payload: mode });
+export function setThemeModeAction(mode: ThemeState['mode']): void {
+  store.dispatch(setThemeMode(mode));
+}
+
+export function setSettingsAction(settings: SettingsState): void {
+  store.dispatch(setSettings(settings));
 }

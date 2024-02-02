@@ -5,9 +5,10 @@ import {
   openSettingsDialog,
   openRulesDialog,
   openDialog,
-  resetThemeMode,
-  setThemeMode,
-  toggleThemeMode,
+  resetThemeModeAction,
+  setThemeModeAction,
+  toggleThemeModeAction,
+  setSettingsAction,
 } from './actions';
 import { DialogKey } from './types';
 
@@ -27,7 +28,10 @@ describe('data/store/actions', () => {
       closeDialog();
 
       // Assert
-      expect(store.dispatch).toHaveBeenCalledWith({ type: 'dialog/close' });
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: 'dialog/dialogClose',
+        payload: {},
+      });
     });
   });
 
@@ -44,7 +48,7 @@ describe('data/store/actions', () => {
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'dialog/open',
+        type: 'dialog/dialogOpen',
         payload: dialog,
       });
     });
@@ -63,7 +67,7 @@ describe('data/store/actions', () => {
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'dialog/open',
+        type: 'dialog/dialogOpen',
         payload: dialog,
       });
     });
@@ -82,7 +86,7 @@ describe('data/store/actions', () => {
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'dialog/open',
+        type: 'dialog/dialogOpen',
         payload: dialog,
       });
     });
@@ -101,7 +105,7 @@ describe('data/store/actions', () => {
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'dialog/open',
+        type: 'dialog/dialogOpen',
         payload: dialog,
       });
     });
@@ -110,11 +114,12 @@ describe('data/store/actions', () => {
   describe('toggleThemeMode', () => {
     it('should dispatch action to toggle light/dark mode', () => {
       // Act
-      toggleThemeMode();
+      toggleThemeModeAction();
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'theme/mode/toggle',
+        type: 'theme/toggleThemeMode',
+        payload: undefined,
       });
     });
   });
@@ -122,11 +127,12 @@ describe('data/store/actions', () => {
   describe('resetThemeMode', () => {
     it('should dispatch action to reset light/dark mode to user preference', () => {
       // Act
-      resetThemeMode();
+      resetThemeModeAction();
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'theme/mode/reset',
+        type: 'theme/resetThemeMode',
+        payload: undefined,
       });
     });
   });
@@ -134,12 +140,32 @@ describe('data/store/actions', () => {
   describe('setThemeMode', () => {
     it('should dispatch action to set light/dark mode to provided value', () => {
       // Act
-      setThemeMode('light');
+      setThemeModeAction('light');
 
       // Assert
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: 'theme/mode/set',
+        type: 'theme/setThemeMode',
         payload: 'light',
+      });
+    });
+  });
+
+  describe('setSettings', () => {
+    it('should dispatch action to set the settings object', () => {
+      // Arrange
+      const SETTINGS = {
+        shapes: 9,
+        rows: 5,
+        columns: 4,
+      };
+
+      // Act
+      setSettingsAction(SETTINGS);
+
+      // Assert
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: 'settings/setSettings',
+        payload: SETTINGS,
       });
     });
   });
