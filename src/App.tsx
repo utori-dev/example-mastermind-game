@@ -47,11 +47,11 @@ const ActionContainer = styled.div`
 
 function App(): React.ReactElement | null {
   const mode = useThemeMode();
-  const { rows, columns, shapes } = useSettings();
+  const gameSettings = useSettings();
   const creditsDialogOpen = useDialogIsOpen(DialogKey.CREDITS);
   const settingDialogOpen = useDialogIsOpen(DialogKey.SETTINGS);
 
-  const [settings, setSettings] = React.useState({ rows, columns, shapes });
+  const [settings, setSettings] = React.useState(gameSettings);
 
   /**
    * Updating the settings object

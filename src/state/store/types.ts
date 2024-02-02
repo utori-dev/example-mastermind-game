@@ -27,6 +27,7 @@ export type SettingsState  = {
   rows: number;
   columns: number;
   shapes: number;
+  _persist?: any;
 }
 
 export type ThemeAction =

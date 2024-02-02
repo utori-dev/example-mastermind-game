@@ -27,7 +27,10 @@ function useSelector<T>(
 
 const selectThemeMode = (state: AppState) => state.persistedReducers.theme.mode;
 
-const selectSettings = (state: AppState) => state.persistedReducers.settings;
+/**
+ * Removing the _persist key from persisted settings state
+ */
+const selectSettings = (state: AppState) => (({ _persist: _, ...rest }) => rest)(state.persistedReducers.settings);
 
 /**
  * Returns the color scheme for the current theme.
