@@ -14,10 +14,12 @@ export const settingsSlice = createSlice({
     setSettings: (state, action: PayloadAction<SettingsState>) => {
       const settings = action.payload;
       state = settings;
+      return state;
     },
 
     resetSettings: (state) => {
       state = { ...INITIAL_STATE };
+      return state;
     },
   },
 });
