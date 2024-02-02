@@ -34,6 +34,17 @@ const AppRoot = styled.div`
   ${text.md}
 `;
 
+const Section = styled.section`
+  min-width: 20rem;
+  padding: 1rem;
+`;
+
+const ActionContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+`;
+
 function App(): React.ReactElement | null {
   const mode = useThemeMode();
   const { rows, columns, shapes } = useSettings();
@@ -104,11 +115,11 @@ function App(): React.ReactElement | null {
       <Dialog open={settingDialogOpen} onClose={closeDialog}>
         <Dialog.Title>Settings</Dialog.Title>
         <Dialog.Content>
-          <section>
+          <Section>
             <h2>Number of Rows</h2>
             <p>
               Adjust the number of rows in a game.
-              <br />A higher value indicates a higher difficulty
+              <br />A higher value indicates a higher difficulty.
             </p>
             <Slider
               color="success"
@@ -118,12 +129,12 @@ function App(): React.ReactElement | null {
               id="rows"
               doHandleChange={doHandleSettingChange}
             />
-          </section>
-          <section>
+          </Section>
+          <Section>
             <h2>Number of Columns</h2>
             <p>
               Adjust the number of columns in a game.
-              <br />A higher value indicates a higher difficulty
+              <br />A higher value indicates a higher difficulty.
             </p>
             <Slider
               color="success"
@@ -133,12 +144,12 @@ function App(): React.ReactElement | null {
               id="columns"
               doHandleChange={doHandleSettingChange}
             />
-          </section>
-          <section>
+          </Section>
+          <Section>
             <h2>Number of Shapes</h2>
             <p>
               Adjust the number of colors in a game.
-              <br />A higher value indicates a higher difficulty
+              <br />A higher value indicates a higher difficulty.
             </p>
             <Slider
               color="success"
@@ -148,13 +159,15 @@ function App(): React.ReactElement | null {
               id="shapes"
               doHandleChange={doHandleSettingChange}
             />
-          </section>
-          <Button
-            variant="primary"
-            type="submit"
-            label="Save"
-            onClick={doHandleSubmit}
-          />
+          </Section>
+          <ActionContainer>
+            <Button
+              variant="primary"
+              type="submit"
+              label="Save"
+              onClick={doHandleSubmit}
+            />
+          </ActionContainer>
         </Dialog.Content>
       </Dialog>
 

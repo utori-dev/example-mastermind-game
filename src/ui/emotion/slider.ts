@@ -21,6 +21,7 @@ const slider: SliderStyles = {
     background: grey;
     border-radius: 5px;
     background-repeat: no-repeat;
+    width: calc(100% - 3rem);
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;

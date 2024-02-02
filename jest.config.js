@@ -36,6 +36,7 @@ const config = {
     // and the dialog.slice is showing 100% line coverange BUT I think createSlice may need to be tested? - shouldn't be the case
     'src/state/store/theme.slice.ts',
     'src/state/store/dialog.slice.ts',
+    'src/state/store/settings.slice.ts',
   ],
   coverageThreshold: {
     // Specifies all global coverage at 100%
