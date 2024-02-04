@@ -1,14 +1,34 @@
 // AUTO-GENERATED, DO NOT EDIT
 
+export * from './BellIcon';
+export { default as BellIcon } from './BellIcon';
+export * from './CloudIcon';
+export { default as CloudIcon } from './CloudIcon';
+export * from './CoffeeIcon';
+export { default as CoffeeIcon } from './CoffeeIcon';
 export * from './DarkModeIcon';
 export { default as DarkModeIcon } from './DarkModeIcon';
 export * from './FeatherBaseIcon';
 export { default as FeatherBaseIcon } from './FeatherBaseIcon';
+export * from './FeatherIcon';
+export { default as FeatherIcon } from './FeatherIcon';
 export * from './GearIcon';
 export { default as GearIcon } from './GearIcon';
+export * from './HeadphonesIcon';
+export { default as HeadphonesIcon } from './HeadphonesIcon';
 export * from './InfoIcon';
 export { default as InfoIcon } from './InfoIcon';
 export * from './LightModeIcon';
 export { default as LightModeIcon } from './LightModeIcon';
+export * from './LockIcon';
+export { default as LockIcon } from './LockIcon';
+export * from './MusicIcon';
+export { default as MusicIcon } from './MusicIcon';
+export * from './RaindropIcon';
+export { default as RaindropIcon } from './RaindropIcon';
 export * from './SvgIcon';
 export { default as SvgIcon } from './SvgIcon';
+export * from './UmbrellaIcon';
+export { default as UmbrellaIcon } from './UmbrellaIcon';
+export * from './WatchIcon';
+export { default as WatchIcon } from './WatchIcon';
