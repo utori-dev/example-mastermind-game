@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { PegType } from '../../../state';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import Button from '../Button';
 import {
   DarkModeIcon,
   GearIcon,
@@ -14,6 +17,18 @@ import {
   FeatherIcon,
   LockIcon,
 } from '../../icons';
+
+const ShapeContainerDiv = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  button {
+    margin: 1rem;
+  }
+  svg {
+    scale: 2;
+  }
+`;
 
 /**
  * Props for the ShapeSelector
@@ -36,7 +51,22 @@ const pegObject = {
 export type ShapeSelectorProps = React.HTMLAttributes<HTMLDivElement> & PegType;
 
 export type ShapeContainerProps = React.HTMLAttributes<HTMLDivElement> & {
+  /**
+   * Number of shapes from settings
+   */
   shapes: number;
+
+  /**
+   * Current peg property
+   */
+  currentPeg: PegType | '';
+
+  /**
+   * Function to set the current peg
+   * @param event
+   * @returns
+   */
+  handleOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /**
@@ -45,32 +75,41 @@ export type ShapeContainerProps = React.HTMLAttributes<HTMLDivElement> & {
  * @param props
  * @returns
  */
-const ShapeSelector: React.FC<ShapeSelectorProps> = (props) => {
+export const ShapeSelector: React.FC<ShapeSelectorProps> = (props) => {
   const { peg } = props;
 
   return peg && pegObject[peg];
 };
 
+/**
+ *
+ * @param props
+ * @returns
+ */
 export const ShapeContainer: React.FC<ShapeContainerProps> = (props) => {
-  const { shapes } = props;
-
-  const shapesArray = Object.entries(pegObject)
-    .map(([property, peg], index) => {
-      return (
-        <button key={property} value={property}>
-          {peg}
-        </button>
-      );
-    })
-    .slice(0, shapes);
+  const { shapes, currentPeg, handleOnClick } = props;
 
   return (
-    <>
-      {shapesArray.map((peg, index) => {
-        return peg;
-      })}
-    </>
+    <ShapeContainerDiv>
+      {Object.entries(pegObject)
+        .map(([property, peg], index) => {
+          return (
+            <Button
+              iconOnly
+              icon={peg}
+              label={property}
+              key={`${index}-property`}
+              value={property}
+              onClick={handleOnClick}
+              css={css`
+                ${currentPeg === property ? 'background-color: gray' : ''}
+              `}
+            />
+          );
+        })
+        .slice(0, shapes)}
+    </ShapeContainerDiv>
   );
 };
 
-export default ShapeSelector;
+export default ShapeContainer;

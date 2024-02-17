@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SettingsState, PegType } from '../../../state';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import ShapeSelector, { ShapeContainer } from '../ShapeSelector';
+import ShapeContainer, { ShapeSelector } from '../ShapeSelector';
 
 /**
  * Props for the Board
@@ -18,23 +18,18 @@ const BoardContainer = styled.div`
   margin: auto;
 `;
 
-const ShapesContainer = styled.div`
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1rem;
-  svg {
-    padding: 1rem;
-    scale: 2;
-  }
-`;
-
 const GameCircle = styled.div`
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 100%;
   margin: 1rem;
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    scale: 1.5;
+  }
 `;
 
 const GameBoard = styled.div`
@@ -50,7 +45,7 @@ const GameBoard = styled.div`
  * @returns
  */
 const Board: React.FC<BoardProps> = (props) => {
-  const { rows, columns, shapes, currentIndex = rows - 1, peg } = props;
+  const { rows, columns, shapes, currentIndex = rows - 1 } = props;
 
   /**
    * Creating a default matrix for now.
@@ -58,6 +53,7 @@ const Board: React.FC<BoardProps> = (props) => {
    */
   const boardMatrix = Array.from(Array(rows), () => Array.from(Array(columns)));
   const [boardState, setBoardState] = React.useState(boardMatrix);
+  const [currentPeg, setCurrentPeg] = React.useState('' as PegType | '');
 
   React.useEffect(() => {
     setBoardState(boardMatrix);
@@ -70,24 +66,31 @@ const Board: React.FC<BoardProps> = (props) => {
 
   /**
    * Function to update the board matrix.
-   * @TODO will need to figure out the best way to pass shapeIndex to component
    * @param row
    * @param col
    * @param shapeIndex
    * @returns
    */
-  const handleOnClick = (row: number, col: number, shapeIndex: number = 0) => {
-    console.log('handleOnClick', { row, col, shapeIndex });
+  const handleBoardOnClick = (row: number, col: number) => {
     if (row !== currentIndex) return;
     const targetCell = boardStateClone[row][col];
 
-    if (targetCell === shapeIndex) {
-      boardStateClone[row][col] = undefined;
+    if (targetCell === currentPeg) {
+      boardStateClone[row][col] = '';
     } else {
-      boardStateClone[row][col] = 'a';
+      boardStateClone[row][col] = currentPeg;
     }
     setBoardState(() => boardStateClone);
   };
+
+  const handleShapeOnClick = React.useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      const { value } = event.currentTarget as HTMLButtonElement;
+      /** @todo update type */
+      setCurrentPeg(value as any);
+    },
+    []
+  );
 
   return (
     <>
@@ -105,7 +108,7 @@ const Board: React.FC<BoardProps> = (props) => {
               <>
                 {row.map((column, colIndex) => (
                   <GameCircle
-                    onClick={() => handleOnClick(rowIndex, colIndex)}
+                    onClick={() => handleBoardOnClick(rowIndex, colIndex)}
                     key={`row-${colIndex}`}
                   >
                     <ShapeSelector peg={column} />
@@ -117,7 +120,11 @@ const Board: React.FC<BoardProps> = (props) => {
           );
         })}
       </BoardContainer>
-      <ShapeContainer shapes={shapes}/>
+      <ShapeContainer
+        shapes={shapes}
+        currentPeg={currentPeg}
+        handleOnClick={handleShapeOnClick}
+      />
     </>
   );
 };

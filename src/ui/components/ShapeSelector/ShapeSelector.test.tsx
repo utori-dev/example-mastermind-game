@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import ShapeSelector from './ShapeSelector';
+import { ShapeSelector } from './ShapeSelector';
 
 describe('ShapeSelector', () => {
   // Dummy test to get you started
   it('should render without errors', () => {
     // Act
-    const tree = renderer.create(<ShapeSelector />).toJSON();
+    const tree = renderer.create(<ShapeSelector peg='a' />).toJSON();
 
     // Assert
     expect(tree).toBeTruthy();
