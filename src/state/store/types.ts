@@ -23,12 +23,16 @@ export interface ThemeState {
   mode: 'light' | 'dark';
 }
 
-export type SettingsState  = {
+export type SettingsState = {
   rows: number;
   columns: number;
   shapes: number;
   _persist?: any;
-}
+};
+
+export type PegType = {
+  peg: 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l';
+};
 
 export type ThemeAction =
   | Action<'theme/mode/toggle'>

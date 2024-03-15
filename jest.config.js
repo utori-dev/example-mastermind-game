@@ -37,6 +37,7 @@ const config = {
     'src/state/store/theme.slice.ts',
     'src/state/store/dialog.slice.ts',
     'src/state/store/settings.slice.ts',
+    'src/state/store/board.slice.ts',
   ],
   coverageThreshold: {
     // Specifies all global coverage at 100%

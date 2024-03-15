@@ -4,8 +4,9 @@ import {
   closeDialog,
   openRulesDialog,
   useDialogIsOpen,
+  useSettings,
 } from '../../state';
-import { Button, Dialog } from '../../ui/components';
+import { Button, Dialog, Board } from '../../ui/components';
 
 /**
  * Props for the HomeView component.
@@ -19,7 +20,10 @@ export type HomeViewProps = React.HTMLAttributes<HTMLDivElement>;
  * @returns
  */
 const HomeView: React.FC<HomeViewProps> = (props) => {
-  const { /* extract custom props here */ ...forwardedProps } = props;
+  const { ...forwardedProps } = props;
+  const gameSettings = useSettings();
+  const [peg, setPeg] = React.useState('' as any);
+
   const creditsRulesOpen = useDialogIsOpen(DialogKey.RULES);
 
   return (
@@ -83,7 +87,7 @@ const HomeView: React.FC<HomeViewProps> = (props) => {
           </section>
         </Dialog.Content>
       </Dialog>
-
+<Board {...gameSettings} peg={peg}/>
       {/** @TODO consider adding Board UI Here
        */}
     </div>
